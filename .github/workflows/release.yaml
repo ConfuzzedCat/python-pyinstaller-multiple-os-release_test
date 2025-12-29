@@ -11,7 +11,7 @@ jobs:
     name: Perform unit tests which do not depend on OS
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -39,7 +39,7 @@ jobs:
         run: |
           echo "${{ steps.create_empty_release.outputs.upload_url }}" > release_url.txt
       - name: Save release URL for later uploads
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         with:
           name: release_url
           path: release_url.txt
@@ -73,7 +73,7 @@ jobs:
             CMD_ZIP: |
               7z a hello_windows.zip .\dist\hello-world\*
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -88,7 +88,7 @@ jobs:
       - name: Package .zip for ${{ matrix.TARGET }}
         run: ${{ matrix.CMD_ZIP }}
       - name: Load previously uploaded release URL
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v7
         with:
           name: release_url
       - name: Get release URL
